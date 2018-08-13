@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: zuul server
+    
+server:
+  port: 8762
+  
+eureka:
+    client:
+      serviceUrl:
+        defaultZone: http://localhost:8761/eureka/
+     
+
+zuul:
+  routes:
+    user: 
+      path: /user/**
+      serviceId: user-microservice
+    
+    note:  
+      path: /note/**
+      serviceId: note-microservice
+    
+    label:  
+      path: /label/**
+      serviceId: note-microservice
+    
+   # Increase the Hystrix timeout to 60s (globally)
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 600000 
